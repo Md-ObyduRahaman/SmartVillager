@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 
 <head>
     <meta charset="utf-8">
@@ -611,34 +612,39 @@
                                             <a class="btn btn-clean open-form" data-text-open="Contact us via form" data-text-close="Close form">Contact us via form</a>
 
                                             <div class="contact-form clearfix">
-                                                <form id="sendmail" name="sendmail" action="sendmail.php" method="post">
+                                                <form id="sendmail" th:object="${userSms}" name="sendmail" action="#" th:action="@{/submit}" method="post">
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <input id="Name" name="Name" type="text" value="" class="form-control" placeholder="Your name" >
+                                                                <input id="Name" th:field="*{name}" type="text" value="" class="form-control" placeholder="Your name" >
                                                             </div>
                                                         </div>
 
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <input id="Email" name="Email" type="email" value="" class="form-control" placeholder="Your email" >
+                                                                <input id="Email" th:field="*{email}" type="email" value="" class="form-control" placeholder="Your email" >
                                                             </div>
                                                         </div>
 
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <input id="Subject" name="Subject" type="text" value="" class="form-control" placeholder="Subject" >
+                                                                <input id="Subject" th:field="*{subject}" type="text" value="" class="form-control" placeholder="Subject" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <input id="Number" th:field="*{number}" type="number" value="" class="form-control" placeholder="Mobile number" >
                                                             </div>
                                                         </div>
 
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <textarea id="Comment" name="Comment" class="form-control" placeholder="Your message" rows="10"></textarea>
+                                                                <textarea id="Comment" th:field="*{comment}" class="form-control" placeholder="Your message" rows="10"></textarea>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-md-12 text-center">
-                                                            <input type="submit" class="btn btn-clean" value="Send message" />
+                                                            <input type="submit" class="btn btn-clean" value="" />
                                                         </div>
                                                     </div>
                                                 </form>
