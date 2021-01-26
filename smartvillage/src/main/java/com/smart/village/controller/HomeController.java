@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.smart.village.model.UserSms;
+import com.smart.village.repository.UserSmsRepo;
 
 @Controller
 public class HomeController {
 	
-	/*
-	 * @Autowired(required=true) UserSms userSms;
-	 */
-	
+	@Autowired
+	UserSmsRepo userSmsRepo;
 	@GetMapping("/index")
 	public String index() {
 		System.out.println("controller work");
@@ -28,6 +27,8 @@ public class HomeController {
 	{
 		System.out.println("submit is worked");
 		System.out.println(userSms.toString());
+		userSmsRepo.save(userSms);
+		
 		return "contact-success"; 
 	}
 
