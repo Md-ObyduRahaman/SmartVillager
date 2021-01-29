@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.smart.village.model.UserSms;
 import com.smart.village.repository.UserSmsRepo;
+import com.smart.village.util.Service;
 
 @Controller
 public class HomeController {
+	
+	@Autowired
+	Service service;
 	
 	@Autowired
 	UserSmsRepo userSmsRepo;
@@ -26,9 +30,9 @@ public class HomeController {
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public String submit(@ModelAttribute("userSms") UserSms userSms, BindingResult result)
 	{
-		System.out.println("submit is worked");
-		System.out.println(userSms.toString());
+		service.sendSms(userSms);
 		userSmsRepo.save(userSms);
+		
 		
 		return "contact-success"; 
 	}
