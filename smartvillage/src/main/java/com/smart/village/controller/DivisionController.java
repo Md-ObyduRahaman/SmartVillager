@@ -10,15 +10,15 @@ import com.smart.village.model.UserSms;
 public class DivisionController {
 
 	@GetMapping("/mymensingh")
-	public String mymensingh() {
-		System.out.println("mymensingh controller work");
+	public String mymensingh(Model model) {
+		model.addAttribute("title","Mymensingh Division");
 		return "mymensingh_division";
 	}
 	@GetMapping("/contact")
 	public String contact (Model model) {
 		UserSms userSms=new UserSms();
 		model.addAttribute("userSms",userSms);
-		System.out.println("contact");
+		model.addAttribute("title","Contact information");
 		return "contact";
 		
 	}
