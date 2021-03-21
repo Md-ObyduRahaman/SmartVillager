@@ -21,7 +21,7 @@ public class AdminController {
 	{
 		DistrictInformation dInformation=new DistrictInformation();
 		model.addAttribute("dInformation",dInformation);
-		return "admin";
+		return "dashboard";
 	}
 	
 	@PostMapping("/districtInfSave")
