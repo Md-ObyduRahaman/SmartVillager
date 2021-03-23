@@ -1,6 +1,7 @@
 package com.smart.village.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,4 +32,13 @@ public class AdminController {
 		districtInformationRepo.save(dInformation);
         return "redirect:/admin";
 	}
+	 @GetMapping("/head")
+	    public String headOfice(Authentication authentication) {	        
+	        return "head";
+	    }
+	 @GetMapping("/trail")
+	 public String trail()
+	 {
+		 return "registration";
+	 }
 }
