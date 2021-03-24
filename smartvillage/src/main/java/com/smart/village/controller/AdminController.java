@@ -34,7 +34,7 @@ public class AdminController {
 	}
 	 @GetMapping("/head")
 	    public String headOfice(Authentication authentication) {	        
-	        return "head";
+	        return "registration";
 	    }
 	 @GetMapping("/trail")
 	 public String trail()
