@@ -9,7 +9,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.smart.village.model.Role;
 import com.smart.village.model.User;
 
 
@@ -23,14 +22,9 @@ public class MyUserDetails implements UserDetails {
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Set<Role> roles=user.getRoles();
-		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		
-		for(Role role:roles) {
-			authorities.add(new SimpleGrantedAuthority(role.getName()));
-		}
-		
-		return authorities;
+
+		SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(user.getRole());
+		return List.of(simpleGrantedAuthority);
 	}
 
 	@Override

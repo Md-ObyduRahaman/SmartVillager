@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import com.smart.village.model.AdminInformation;
 import com.smart.village.model.DistrictInformation;
-import com.smart.village.repository.AdminInformationRepo;
+import com.smart.village.model.User;
 import com.smart.village.repository.DistrictInformationRepo;
+import com.smart.village.repository.UserRepo;
 
 @Controller
 public class AdminController {
@@ -29,11 +29,12 @@ public class AdminController {
 	@Autowired
 	DistrictInformationRepo districtInformationRepo;
 	@Autowired
-	AdminInformationRepo adminInformationRepo;
-	/*
-	 * @Autowired private BCryptPasswordEncoder passwordEncoder;
-	 */
-	AdminInformation adminInformation;
+	UserRepo userRepo;
+	
+	  @Autowired private 
+	  BCryptPasswordEncoder passwordEncoder;
+	 
+	
 
 	@GetMapping("/admin")
 	public String admin(Model model)
@@ -63,12 +64,16 @@ public class AdminController {
 	 }
 	 
 	 @PostMapping("/saveAdmin")
-	 public String saveAdmin(@ModelAttribute AdminInformation adminInformation,@RequestParam("profileImage") MultipartFile file,
+	 public String saveAdmin(@ModelAttribute User adminInformation,@RequestParam("profileImage") MultipartFile file,
 				Principal principal, HttpSession session)
 	 {
-		 adminInformation.setRole("ADMIN");
-		// adminInformation.setPassword(passwordEncoder.encode(adminInformation.getPassword()));
-
+		 //String name = principal.getName();
+			//User user = this.userRepo.getUserByUserName(name);
+			adminInformation.setRole("ADMIN");
+			//adminInformation.setRole("ROLE_USER");
+			adminInformation.setEnabled(true);	
+			
+			adminInformation.setPassword(passwordEncoder.encode(adminInformation.getPassword()));
 			try {
 
 				
@@ -94,7 +99,8 @@ public class AdminController {
 
 				}
 				
-				adminInformationRepo.save(adminInformation);
+				userRepo.save(adminInformation);
+
 				
 
 			

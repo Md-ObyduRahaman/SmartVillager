@@ -19,32 +19,42 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users")
 public class User {
-	@Id
-	@Column(name="user_id")
-	@GeneratedValue(strategy =GenerationType.IDENTITY)
-	private Long id;
+	@Id		
+	private String issocode;
 	private String username;
 	private String password;
 	private boolean enabled;
+	private String nationality;
+	private String address;
+	private String website;
+	private String twitter;
+	private String instagram;
+	private String facebook;
+	private String city;
+	@Column(unique = true)
+	private String email;
+	private String phone;
+	private String imageUrl;
+	private String role;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name ="users_roles", joinColumns = @JoinColumn (name="user_id"), inverseJoinColumns = @JoinColumn (name="role_id"))
-	private Set<Role> roles=new HashSet<>();
+	
+	
 
-	public Long getId() {
-		return id;
+	
+
+	
+
+
+	
+
+	
+
+	public String getIssocode() {
+		return issocode;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
+	public void setIssocode(String issocode) {
+		this.issocode = issocode;
 	}
 
 	public String getPassword() {
@@ -62,18 +72,110 @@ public class User {
 		this.enabled = enabled;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
+	public String getRole() {
+		return role;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
-				+ ", roles=" + roles + "]";
-	}	
+	public String getNationality() {
+		return nationality;
+	}
+
+	
+
+	public String getAddress() {
+		return address;
+	}
+
+	
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public String getTwitter() {
+		return twitter;
+	}
+
+	public void setTwitter(String twitter) {
+		this.twitter = twitter;
+	}
+
+	public String getInstagram() {
+		return instagram;
+	}
+
+	public void setInstagram(String instagram) {
+		this.instagram = instagram;
+	}
+
+	public String getFacebook() {
+		return facebook;
+	}
+
+	public void setFacebook(String facebook) {
+		this.facebook = facebook;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+
+
+
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	
 	
 }
