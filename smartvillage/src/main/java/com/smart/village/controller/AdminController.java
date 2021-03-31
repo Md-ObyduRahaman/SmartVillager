@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,9 @@ public class AdminController {
 	DistrictInformationRepo districtInformationRepo;
 	@Autowired
 	AdminInformationRepo adminInformationRepo;
-	
+	/*
+	 * @Autowired private BCryptPasswordEncoder passwordEncoder;
+	 */
 	AdminInformation adminInformation;
 
 	@GetMapping("/admin")
@@ -49,7 +52,8 @@ public class AdminController {
         return "redirect:/admin";
 	}
 	 @GetMapping("/head")
-	    public String headOfice(Authentication authentication) {	        
+	    public String headOfice() {	 
+		 	System.out.println("head is ok");
 	        return "registration";
 	    }
 	 @GetMapping("/trail")
@@ -63,6 +67,7 @@ public class AdminController {
 				Principal principal, HttpSession session)
 	 {
 		 adminInformation.setRole("ADMIN");
+		// adminInformation.setPassword(passwordEncoder.encode(adminInformation.getPassword()));
 
 			try {
 

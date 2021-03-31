@@ -1,5 +1,6 @@
 package com.smart.village.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -15,6 +16,7 @@ public class AdminInformation {
 	@Id
 	private String issocode;
 	private String city;
+	@Column(unique = true)
 	private String email;
 	private String phone;
 	private String imageUrl;
