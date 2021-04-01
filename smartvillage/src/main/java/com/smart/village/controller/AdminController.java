@@ -67,8 +67,7 @@ public class AdminController {
 	 public String saveAdmin(@ModelAttribute User adminInformation,@RequestParam("profileImage") MultipartFile file,
 				Principal principal, HttpSession session)
 	 {
-		 //String name = principal.getName();
-			//User user = this.userRepo.getUserByUserName(name);
+		 
 			adminInformation.setRole("ADMIN");
 			//adminInformation.setRole("ROLE_USER");
 			adminInformation.setEnabled(true);	
