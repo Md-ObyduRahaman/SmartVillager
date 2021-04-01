@@ -10,7 +10,7 @@ import com.smart.village.model.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 
-	@Query("SELECT u from User u Where u.username = :username")
-	public User getUserByUsername(@Param("username") String username);
+	@Query("select u from User u where u.email = :email")
+	public User getUserByUsername(@Param("email") String email);
 	
 }
