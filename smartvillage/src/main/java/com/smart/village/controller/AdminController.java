@@ -60,7 +60,7 @@ public class AdminController {
 	 @GetMapping("/trail")
 	 public String trail()
 	 {
-		 return "registration";
+		 return "profile";
 	 }
 	 
 	 @PostMapping("/saveAdmin")
