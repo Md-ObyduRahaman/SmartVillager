@@ -27,6 +27,11 @@ public class HomeController {
 		model.addAttribute("title","Smart visitor");
 		return "index";
 	}
+	@GetMapping("/head")
+    public String headOfice() {	 
+	 	System.out.println("head is ok");
+        return "registration";
+    }
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public String submit(@ModelAttribute("userSms") UserSms userSms, BindingResult result)
 	{

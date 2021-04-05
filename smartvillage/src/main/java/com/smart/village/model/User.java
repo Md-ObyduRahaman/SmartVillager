@@ -176,6 +176,14 @@ public class User {
 		this.username = username;
 	}
 
+	@Override
+	public String toString() {
+		return "User [issocode=" + issocode + ", username=" + username + ", password=" + password + ", enabled="
+				+ enabled + ", nationality=" + nationality + ", address=" + address + ", website=" + website
+				+ ", twitter=" + twitter + ", instagram=" + instagram + ", facebook=" + facebook + ", city=" + city
+				+ ", email=" + email + ", phone=" + phone + ", imageUrl=" + imageUrl + ", role=" + role + "]";
+	}
+
 	
 	
 }

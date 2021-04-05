@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.smart.village.model.DistrictInformation;
@@ -24,24 +25,30 @@ import com.smart.village.repository.DistrictInformationRepo;
 import com.smart.village.repository.UserRepo;
 
 @Controller
+/* @RequestMapping("/admin") */
 public class AdminController {
 	
 	@Autowired
 	DistrictInformationRepo districtInformationRepo;
 	@Autowired
 	UserRepo userRepo;
+	//@Autowired
+	User user;
 	
 	  @Autowired private 
 	  BCryptPasswordEncoder passwordEncoder;
 	 
 	
 
-	@GetMapping("/admin")
-	public String admin(Model model)
+	@GetMapping("/dashboard")
+	public String admin(Model model,Principal principal)
 	
 	{
-		DistrictInformation dInformation=new DistrictInformation();
-		model.addAttribute("dInformation",dInformation);
+		String name = principal.getName();
+		User user = this.userRepo.getUserByUserName(name);
+		
+		System.out.println("...................."+user.toString());
+		model.addAttribute("users", user);
 		return "dashboard";
 	}
 	
@@ -52,14 +59,11 @@ public class AdminController {
 		districtInformationRepo.save(dInformation);
         return "redirect:/admin";
 	}
-	 @GetMapping("/head")
-	    public String headOfice() {	 
-		 	System.out.println("head is ok");
-	        return "registration";
-	    }
-	 @GetMapping("/trail")
-	 public String trail()
+	 
+	 @GetMapping("/profile")
+	 public String profile(Model model)
 	 {
+		 model.addAttribute("user", user);
 		 return "profile";
 	 }
 	 
