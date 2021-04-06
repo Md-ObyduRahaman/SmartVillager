@@ -46,9 +46,7 @@ public class AdminController {
 	{
 		String name = principal.getName();
 		User user = this.userRepo.getUserByUserName(name);
-		
-		System.out.println("...................."+user.toString());
-		model.addAttribute("users", user);
+		model.addAttribute("user", user);
 		return "dashboard";
 	}
 	
@@ -61,8 +59,11 @@ public class AdminController {
 	}
 	 
 	 @GetMapping("/profile")
-	 public String profile(Model model)
+	 public String profile(Model model,Principal principal)
 	 {
+		 String name = principal.getName();
+			User user = this.userRepo.getUserByUserName(name);	
+			model.addAttribute("user", user);
 		 model.addAttribute("user", user);
 		 return "profile";
 	 }
@@ -117,4 +118,87 @@ public class AdminController {
 		 
 		 return "registration";
 	 }
+	@PostMapping("/updateProfile")
+	 public String editProfile(
+			 	@RequestParam("username") String username,
+				@RequestParam("email") String email,
+				@RequestParam("phone") String phone,
+				@RequestParam("nationality") String nationality,
+				@RequestParam("address") String address,
+				@RequestParam("website") String website,
+				@RequestParam("twitter") String twitter,
+				@RequestParam("instagram") String instagram,
+				@RequestParam("facebook") String facebook,
+				@RequestParam("profileImage") MultipartFile file,
+				Model model, HttpSession session, Principal principal) {
+		
+	
+		try {
+
+			// old contact details
+			String name = principal.getName();
+			User user = this.userRepo.getUserByUserName(name);
+						System.out.println(user.toString());
+
+			// processing and uploading file..
+
+			if (file.isEmpty()) {
+				// if the file is empty then try our message
+				System.out.println("File is empty");
+				//user.setImageUrl("contact.png");
+
+			} else {
+				// file the file to folder and update the name to contact
+				user.setImageUrl(file.getOriginalFilename());
+
+				File saveFile = new ClassPathResource("static/img").getFile();
+
+				Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename());
+
+				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+				System.out.println("Image is uploaded");
+
+			}
+			user.setAddress(address);
+			user.setEmail(email);
+			user.setFacebook(facebook);
+			user.setPhone(phone);
+			user.setInstagram(instagram);
+			user.setNationality(nationality);
+			user.setTwitter(twitter);
+			user.setUsername(username);
+			
+			userRepo.save(user);
+
+			
+
+		
+		} catch (Exception e) {
+			System.out.println("ERROR " + e.getMessage());
+			e.printStackTrace();
+			// message error
+			//session.setAttribute("message", new Message("Some went wrong !! Try again..", "danger"));
+
+		}
+		String name = principal.getName();
+		User user = this.userRepo.getUserByUserName(name);	
+		model.addAttribute("user", user);
+		 
+			
+		return "redirect:/profile";	
+	}
+	@GetMapping("/editProfile")
+	public String editProfile(Model model,Principal principal)
+	 {
+		 String name = principal.getName();
+			User user = this.userRepo.getUserByUserName(name);	
+			model.addAttribute("user", user);
+		 model.addAttribute("user", user);
+		 
+	 
+		return "edit_profile";
+		
+	}
+			
 }

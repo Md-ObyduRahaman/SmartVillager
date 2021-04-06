@@ -34,15 +34,15 @@
                         <div class="card">
                           <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                               <div  align="center"> <img alt="User Pic" src="assets/images/user.png" id="profile-image1" class="img-circle img-responsive"> 
+                               <div  align="center"> <img alt="User Pic" th:src="@{'/img/'+${user.imageUrl}}" id="profile-image1" class="img-circle img-responsive"> 
                           
                                <input id="profile-image-upload" class="hidden" type="file">
                                 <div style="color:#999;" >click here to change profile image</div>
                                
                                </div>
                               <div class="mt-3">
-                                <h4>Cheif Execute Officer</h4>
-                                <p class="text-secondary mb-1">Smart Visitor</p>
+                                <h4><span th:text="${user.role}"></span></h4>
+                                <p class="text-secondary mb-1">of Smart Visitor</p>
                                 <p class="text-muted font-size-sm">Mymensingh Branch</p>
                                 <button class="btn btn-outline-primary">Message</button>
                               </div>
@@ -82,7 +82,7 @@
                                 <h6 class="mb-0">Full Name</h6>
                               </div>
                               <div class="col-sm-9 text-secondary">
-                                Obaidur Rahman Sojib
+                                <span th:text="${user.username}"></span>
                               </div>
                             </div>
                             <hr>
@@ -91,7 +91,7 @@
                                 <h6 class="mb-0">Email</h6>
                               </div>
                               <div class="col-sm-9 text-secondary">
-                                sojib@gmail.com
+                               <span th:text="${user.email}"></span>
                               </div>
                             </div>
                             <hr>
@@ -100,7 +100,7 @@
                                 <h6 class="mb-0">Phone</h6>
                               </div>
                               <div class="col-sm-9 text-secondary">
-                                (239) 816-9029
+                               <span th:text="${user.phone}"></span>
                               </div>
                             </div>
                             <hr>
@@ -109,7 +109,7 @@
                                 <h6 class="mb-0">Mobile</h6>
                               </div>
                               <div class="col-sm-9 text-secondary">
-                                01783-726898
+                               <span th:text="${user.phone}"></span>
                               </div>
                             </div>
                             <hr>
@@ -118,7 +118,7 @@
                                 <h6 class="mb-0">Nationality</h6>
                               </div>
                               <div class="col-sm-9 text-secondary">
-                                Bangladeshi
+                               <span th:text="${user.nationality}"></span>
                               </div>
                             </div>
                             <hr>
@@ -127,7 +127,7 @@
                                 <h6 class="mb-0">Address</h6>
                               </div>
                               <div class="col-sm-9 text-secondary">
-                                Akua Hajibari, Mymensingh
+                                 <span th:text="${user.address}"></span>
                               </div>
                             </div>
                           </div>
