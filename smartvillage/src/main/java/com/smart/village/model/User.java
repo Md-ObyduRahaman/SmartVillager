@@ -1,6 +1,8 @@
 package com.smart.village.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,11 +15,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
+
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 	@Id		
 	private String issocode;
@@ -37,17 +41,18 @@ public class User {
 	private String imageUrl;
 	private String role;
 	
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<HospitlInformation> hospitlInformations=new ArrayList<>();
 	
 	
 
-	
+	public List<HospitlInformation> getHospitlInformations() {
+		return hospitlInformations;
+	}
 
-	
-
-
-	
-
-	
+	public void setHospitlInformations(List<HospitlInformation> hospitlInformations) {
+		this.hospitlInformations = hospitlInformations;
+	}
 
 	public String getIssocode() {
 		return issocode;

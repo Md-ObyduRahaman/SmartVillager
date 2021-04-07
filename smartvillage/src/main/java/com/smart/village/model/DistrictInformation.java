@@ -12,6 +12,7 @@ public class DistrictInformation {
 	@Id
 	private String isoCode;
 	private String division;
+	private String divisionIssoCode;
 	public DistrictInformation() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -21,6 +22,13 @@ public class DistrictInformation {
 		this.name = name;
 		this.isoCode = isoCode;
 		this.division = division;
+	}
+	
+	public String getDivisionIssoCode() {
+		return divisionIssoCode;
+	}
+	public void setDivisionIssoCode(String divisionIssoCode) {
+		this.divisionIssoCode = divisionIssoCode;
 	}
 	public String getName() {
 		return name;

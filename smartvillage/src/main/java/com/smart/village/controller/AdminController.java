@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.smart.village.model.DistrictInformation;
+import com.smart.village.model.HospitlInformation;
 import com.smart.village.model.User;
 import com.smart.village.repository.DistrictInformationRepo;
 import com.smart.village.repository.UserRepo;
@@ -194,11 +195,37 @@ public class AdminController {
 		 String name = principal.getName();
 			User user = this.userRepo.getUserByUserName(name);	
 			model.addAttribute("user", user);
-		 model.addAttribute("user", user);
+		 
 		 
 	 
 		return "edit_profile";
 		
+	}
+	@GetMapping("/hospital")
+	public String hospital(Model model,Principal principal)
+	 {
+		 String name = principal.getName();
+			User user = this.userRepo.getUserByUserName(name);	
+			model.addAttribute("user", user);
+		 
+		return "hospitalForm";
+	}
+	@PostMapping("/savehospitalInformation")
+	public String savehospitalInformation(@ModelAttribute HospitlInformation hospitlInformation,
+			Principal principal,Model model) {
+		 String name = principal.getName();
+			User user = this.userRepo.getUserByUserName(name);	
+			model.addAttribute("user", user);
+			
+			user.getHospitlInformations().add(hospitlInformation);
+
+			hospitlInformation.setUser(user);
+
+			this.userRepo.save(user);
+
+			
+			
+		return "redirect:/profile";	
 	}
 			
 }
