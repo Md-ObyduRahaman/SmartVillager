@@ -1,6 +1,5 @@
 package com.smart.village.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -11,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @Configuration
 @EnableWebSecurity
@@ -28,12 +26,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	
 
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-	    web
-	            .ignoring()
-	            .antMatchers( "/css/**", "/js/**");
-	}
+	 @Override
+	    public void configure(WebSecurity web) throws Exception {
+	        //Web resources
+	        web.ignoring().antMatchers("/css/**");
+	        web.ignoring().antMatchers("/js/**");
+	        web.ignoring().antMatchers("/fonts/**");
+	        web.ignoring().antMatchers("/img/**");
+	    }
 
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
@@ -51,7 +51,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/admin/**","/hospital","/updateProfile","/editProfile","/dashboard","/profile").hasAnyAuthority("HEAD","ADMIN")
+		http.authorizeRequests().antMatchers("/admin/**","/hospital",
+				"/updateProfile","/editProfile","/dashboard",
+				"/show_hospitalInfo/{page}","/profile").hasAnyAuthority("HEAD","ADMIN")
 				.antMatchers("/head/**").hasAuthority("HEAD")
 				.antMatchers("/**").permitAll()
 				.antMatchers("/static/images/**","/static/**","/static/css/**","/static/js/**").permitAll()

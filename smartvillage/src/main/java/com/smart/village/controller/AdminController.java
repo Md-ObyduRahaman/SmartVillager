@@ -201,31 +201,6 @@ public class AdminController {
 		return "edit_profile";
 		
 	}
-	@GetMapping("/hospital")
-	public String hospital(Model model,Principal principal)
-	 {
-		 String name = principal.getName();
-			User user = this.userRepo.getUserByUserName(name);	
-			model.addAttribute("user", user);
-		 
-		return "hospitalForm";
-	}
-	@PostMapping("/savehospitalInformation")
-	public String savehospitalInformation(@ModelAttribute HospitlInformation hospitlInformation,
-			Principal principal,Model model) {
-		 String name = principal.getName();
-			User user = this.userRepo.getUserByUserName(name);	
-			model.addAttribute("user", user);
-			
-			user.getHospitlInformations().add(hospitlInformation);
-
-			hospitlInformation.setUser(user);
-
-			this.userRepo.save(user);
-
-			
-			
-		return "redirect:/profile";	
-	}
+	
 			
 }
