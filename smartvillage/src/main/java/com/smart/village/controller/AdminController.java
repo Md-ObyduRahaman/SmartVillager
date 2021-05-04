@@ -26,7 +26,7 @@ import com.smart.village.repository.DistrictInformationRepo;
 import com.smart.village.repository.UserRepo;
 
 @Controller
-/* @RequestMapping("/admin") */
+@RequestMapping("/admin")
 public class AdminController {
 	
 	@Autowired
@@ -66,7 +66,7 @@ public class AdminController {
 			User user = this.userRepo.getUserByUserName(name);	
 			model.addAttribute("user", user);
 		 model.addAttribute("user", user);
-		 return "profile";
+		 return "admin/profile";
 	 }
 	 
 	 @PostMapping("/saveAdmin")
@@ -74,7 +74,7 @@ public class AdminController {
 				Principal principal, HttpSession session)
 	 {
 		 
-			adminInformation.setRole("ADMIN");
+			adminInformation.setRole("ROLE_ADMIN");
 			//adminInformation.setRole("ROLE_USER");
 			adminInformation.setEnabled(true);	
 			
@@ -187,7 +187,7 @@ public class AdminController {
 		model.addAttribute("user", user);
 		 
 			
-		return "redirect:/profile";	
+		return "redirect:admin/profile";	
 	}
 	@GetMapping("/editProfile")
 	public String editProfile(Model model,Principal principal)
@@ -198,7 +198,7 @@ public class AdminController {
 		 
 		 
 	 
-		return "edit_profile";
+		return "admin_templates/edit_profile";
 		
 	}
 	

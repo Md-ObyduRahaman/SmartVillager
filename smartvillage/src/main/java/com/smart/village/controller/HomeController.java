@@ -22,7 +22,7 @@ public class HomeController {
 	
 	@Autowired
 	UserSmsRepo userSmsRepo;
-	@GetMapping("/index")
+	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("title","Smart visitor");
 		return "index";
@@ -36,9 +36,7 @@ public class HomeController {
 	public String submit(@ModelAttribute("userSms") UserSms userSms, BindingResult result)
 	{
 		service.sendSms(userSms);
-		userSmsRepo.save(userSms);
-		
-		
+		userSmsRepo.save(userSms);	
 		return "contact-success"; 
 	}
 

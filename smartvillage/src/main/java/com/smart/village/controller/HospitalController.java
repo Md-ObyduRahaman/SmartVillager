@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.smart.village.model.HospitlInformation;
 import com.smart.village.model.User;
 import com.smart.village.repository.HospitalInfoRepo;
 import com.smart.village.repository.UserRepo;
 
 @Controller
+@RequestMapping("/admin")
 public class HospitalController {
 	
 	@Autowired
@@ -50,7 +53,7 @@ public class HospitalController {
 
 			this.userRepo.save(user);			
 			
-		return "redirect:/profile";	
+		return "redirect:/admin/show_hospitalInfo/0";	
 	}
 	@GetMapping("/show_hospitalInfo/{page}")
 	public String showHospital(@PathVariable("page") Integer page, Model model,Principal principal)

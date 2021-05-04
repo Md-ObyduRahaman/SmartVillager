@@ -2,6 +2,9 @@ package com.smart.village.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.Filter;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,15 +29,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	
 
-	 @Override
-	    public void configure(WebSecurity web) throws Exception {
-	        //Web resources
-	        web.ignoring().antMatchers("/css/**");
-	        web.ignoring().antMatchers("/js/**");
-	        web.ignoring().antMatchers("/fonts/**");
-	        web.ignoring().antMatchers("/img/**");
-	    }
-
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -51,16 +45,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/admin/**","/hospital",
-				"/updateProfile","/editProfile","/dashboard",
-				"/show_hospitalInfo/{page}","/profile").hasAnyAuthority("HEAD","ADMIN")
-				.antMatchers("/head/**").hasAuthority("HEAD")
+		http.authorizeRequests().antMatchers("/admin/**","admin/show_hospitalInfo/{page}").hasAnyRole("HEAD","ADMIN")
+				.antMatchers("/head/**").hasRole("HEAD")
 				.antMatchers("/**").permitAll()
-				.antMatchers("/static/images/**","/static/**","/static/css/**","/static/js/**").permitAll()
 				.and()
 	            .formLogin().loginPage("/")
 				.loginProcessingUrl("/dologin")
-				.defaultSuccessUrl("/dashboard").permitAll()
+				.defaultSuccessUrl("/admin/dashboard")
 	            .and()
 	            .logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll()
 	            .and()
