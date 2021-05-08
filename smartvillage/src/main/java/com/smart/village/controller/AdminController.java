@@ -66,7 +66,7 @@ public class AdminController {
 			User user = this.userRepo.getUserByUserName(name);	
 			model.addAttribute("user", user);
 		 model.addAttribute("user", user);
-		 return "admin/profile";
+		 return "/profile";
 	 }
 	 
 	 @PostMapping("/saveAdmin")
@@ -119,7 +119,7 @@ public class AdminController {
 		 
 		 return "registration";
 	 }
-	@PostMapping("/updateProfile")
+	@PostMapping("admin/updateProfile")
 	 public String editProfile(
 			 	@RequestParam("username") String username,
 				@RequestParam("email") String email,
@@ -185,9 +185,11 @@ public class AdminController {
 		String name = principal.getName();
 		User user = this.userRepo.getUserByUserName(name);	
 		model.addAttribute("user", user);
+		
+		System.out.println("return \"redirect:admin/profile\";");
 		 
 			
-		return "redirect:admin/profile";	
+		return "redirect:/admin/profile";	
 	}
 	@GetMapping("/editProfile")
 	public String editProfile(Model model,Principal principal)
@@ -198,7 +200,7 @@ public class AdminController {
 		 
 		 
 	 
-		return "admin_templates/edit_profile";
+		return "edit_profile";
 		
 	}
 	

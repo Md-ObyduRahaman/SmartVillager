@@ -8,6 +8,8 @@
 <title>Smart Visitor Admin Panel</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
 	name='viewport' />
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	
 <div th:replace="component :: headerLink"></div>
 </head>
 
@@ -75,28 +77,24 @@
 
 													<th scope="row" th:text="${'SCMUSER'+c.hId}">1</th>
 
-													<td> <span
+													<td><img src="" class="my_profile_picture"
+														th:src="@{'/img/'+${c.imageUrl}}" alt="profile photo" /> <span
 														th:text="${c.name}"></span></td>
-														
-													<td> <span
-														th:text="${c.description}"></span></td>
-														
-													<td> <span
-														th:text="${c.contactInfo}"></span></td>
-														
-													<td><span
-														th:text="${c.noOfICU}"></span></td>
 
-													<td><a href="#"
-														> <span
+													<td><span th:text="${c.description}"></span></td>
+
+													<td><span th:text="${c.contactInfo}"></span></td>
+
+													<td><span th:text="${c.noOfICU}"></span></td>
+
+													<td><a href="#"> <span
 															th:text="${c.websiteLink}"></span>
 
 													</a></td>
 
-													
 
-													<td><a href="#" th:onclick="|deleteContact(${c.hId})|"
-														class="btn btn-danger btn-sm">Delete</a>
+
+													<td><a href="#" th:onclick="|deleteContact(${c.hId})|" class="btn btn-danger btn-sm">Delete</a>
 
 
 														<form method="post"
@@ -121,7 +119,7 @@
 										<ul class="pagination">
 
 											<li th:if="${currentPage != 0}" class="page-item"><a
-												th:href="@{'/user/show-contacts/'+${currentPage-1}}"
+												th:href="@{'/admin/show_hospitalInfo/'+${currentPage-1}}"
 												class="page-link" href="#">Previous</a></li>
 
 
@@ -129,12 +127,12 @@
 											<li th:classappend="${currentPage==i-1?'active':''}"
 												th:each="i : ${#numbers.sequence(1,totalPages)}"
 												class="page-item"><a
-												th:href="@{'/user/show-contacts/'+${i-1}}" class="page-link"
+												th:href="@{'/admin/show_hospitalInfo/'+${i-1}}" class="page-link"
 												href="#"><span th:text="${i}"></span></a></li>
 
 
 											<li th:if="${currentPage+1 != totalPages}" class="page-item"><a
-												th:href="@{'/user/show-contacts/'+${currentPage+1}}"
+												th:href="@{'/admin/show_hospitalInfo/'+${currentPage+1}}"
 												class="page-link" href="#">Next</a></li>
 										</ul>
 									</nav>
@@ -145,7 +143,7 @@
 
 							</div>
 
-							
+
 
 						</section>
 
@@ -253,14 +251,59 @@
 				</li>
 			</ul>
 		</div>
-	</div> 
+	</div>
 	<!--   Core JS Files   -->
-	<section >
+	<section>
+	
 		
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+		crossorigin="anonymous"></script>
+		
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		
+		<script>
+		
+		function deleteContact(cid)
+		{
+			
+			swal({
+				  title: "Are you sure?",
+				  text: "you want to delete this contact..",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true,
+				})
+				.then((willDelete) => {
+				  if (willDelete) {
+				   
+					  
+					  window.location="/admin/delete/"+cid;
+					  
+				  } else {
+				    swal("Your contact is safe !!");
+				  }
+				});
+			
+		}
+		
+		
+		</script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+		<script th:src="@{/js/script.js}"></script>
+	<script th:src="@{/js/script.js}"></script>
 		<script src=" /src/main/resources/static/js/jquery.min.js"></script>
 		<script src=" /src/main/resources/static/js/popper.min.js"></script>
-		<script src=" /src/main/resources/static/js/bootstrap-material-design.min.js"></script>
-		<script src=" /src/main/resources/static/js/perfect-scrollbar.jquery.min.js"></script>
+		<script
+			src=" /src/main/resources/static/js/bootstrap-material-design.min.js"></script>
+		<script
+			src=" /src/main/resources/static/js/perfect-scrollbar.jquery.min.js"></script>
 		<!-- Plugin for the momentJs  -->
 		<script src=" /src/main/resources/static/js/moment.min.js"></script>
 		<!--  Plugin for Sweet Alert -->
@@ -268,11 +311,13 @@
 		<!-- Forms Validations Plugin -->
 		<script src=" /src/main/resources/static/js/jquery.validate.min.js"></script>
 		<!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-		<script src=" /src/main/resources/static/js/jquery.bootstrap-wizard.js"></script>
+		<script
+			src=" /src/main/resources/static/js/jquery.bootstrap-wizard.js"></script>
 		<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
 		<script src=" /src/main/resources/static/js/bootstrap-selectpicker.js"></script>
 		<!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-		<script src=" src/main/resources/static/js/bootstrap-datetimepicker.min.js"></script>
+		<script
+			src=" src/main/resources/static/js/bootstrap-datetimepicker.min.js"></script>
 		<!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
 		<script src=" src/main/resources/static/js/jquery.dataTables.min.js"></script>
 		<!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
@@ -301,6 +346,7 @@
 		<script src=" js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
 		<!-- Material Dashboard DEMO methods, don't include it in your project! -->
 		<script src=" demo/demo.js"></script>
+		
 		<script>
 			$(document)
 					.ready(

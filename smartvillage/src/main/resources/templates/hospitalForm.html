@@ -8,6 +8,7 @@
 <title>Smart Visitor Admin Panel</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
 	name='viewport' />
+	
 <div th:replace="component :: headerLink"></div>
 </head>
 
@@ -28,6 +29,7 @@
 							<h2>Hospital Info</h2>
 							<form action="#" th:object="${hospitalInformation}"
 										 method="POST"
+										 enctype="multipart/form-data" 
 										th:action="@{savehospitalInformation}" class="mt-2">
 
 								<h4>Hospital Name:</h4>

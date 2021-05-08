@@ -13,7 +13,7 @@ public class HospitlInformation {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int hId;
 	private String name;
-	private String image;
+	private String imageUrl;
 	private String description;
 	private String contactInfo;
 	private String noOfICU;
@@ -28,7 +28,7 @@ public class HospitlInformation {
 		super();
 		this.hId = hId;
 		this.name = name;
-		this.image = image;
+		this.imageUrl = image;
 		this.description = description;
 		this.contactInfo = contactInfo;
 		this.noOfICU = noOfICU;
@@ -57,12 +57,14 @@ public class HospitlInformation {
 		this.name = name;
 	}
 
-	public String getImage() {
-		return image;
+
+
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	public String getDescription() {
