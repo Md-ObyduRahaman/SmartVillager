@@ -8,7 +8,6 @@
 <title>Smart Visitor Admin Panel</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
 	name='viewport' />
-	<link rel="stylesheet" th:href="@{/css/style.css}" />
 	
 <div th:replace="component :: headerLink"></div>
 </head>
@@ -26,136 +25,65 @@
 			<div class="content">
 				<div class="container-fluid">
 					<div class="row">
+						<div class="col-md-5">
+							<h2>Hospital Info</h2>
+							<form action="#" th:object="${hospitalInformation}"
+										 method="POST"
+										 enctype="multipart/form-data" 
+										th:action="@{/admin/savehospitalInformation}" class="mt-2">
+										
+										<input type="hidden" th:value="${hospitlInformation.hId}" name="hId">
 
-						<section>
+								<h4>Hospital Name:</h4>
+								<input th:value="${hospitlInformation.name}" type="text" name="name">
+								<hr>
+								<h4>Hospital Description:</h4>
+								<textarea th:value="${hospitlInformation.description}" rows="10" cols="30" name="description"></textarea>
+								<hr>
+								<h4>No Of ICU:</h4>
+								<input th:value="${hospitlInformation.noOfICU}" type="text" name="noOfICU">
+								<hr>
+								<h4>Contact Info:</h4>
+								<input th:value="${hospitlInformation.contactInfo}" type="text" name="contactInfo">
+								<hr>
+								<h4>Hospital Image:</h4>
+								
+								<hr>
+								<!-- Contact Image  -->
 
-							<div class="card mr-3 ml-3">
-
-								<div class="card-body">
-
-									<h1 class="text-center">Hospital information</h1>
-
-
-									<!-- search -->
-
-									<div class="search-container my-3">
-
-
-										<input onkeyup="search()" id="search-input" type="text"
-											class="form-control" placeholder="Search your contacts" />
-
-										<div class="search-result">
-
-											<!--  result goes here -->
-
-
-										</div>
-
-
-
+									<div class="container text-center">
+										<img style="width: 250px; height: 250px;"
+											class="img-fluid my_profile_picture" src=""
+											th:src="@{'/img/'+${hospitlInformation.imageUrl}}" alt="" />
 									</div>
 
+									<p class="text-secondary">Choose new pic</p>
 
-
-									<div class="table-responsive">
-										<table class="table table-hover ">
-											<thead class="thead-light ">
-												<tr>
-													<th scope="col">#ID</th>
-													<th scope="col">Name</th>
-													<th scope="col">description</th>
-													<th scope="col">contactInfo</th>
-													<th scope="col">noOfICU</th>
-													<th scope="col">websiteLink</th>
-													<th scope="col">Action</th>
-												</tr>
-											</thead>
-											<tbody>
-
-
-												<tr th:each="c : ${hospitalInfo}">
-
-													<th scope="row" th:text="${'SCMUSER'+c.hId}">1</th>
-
-													<td><img src="" class="my_profile_picture"
-														th:src="@{'/img/'+${c.imageUrl}}" alt="profile photo" /> <span
-														th:text="${c.name}"></span></td>
-
-													<td><span th:text="${c.description}"></span></td>
-
-													<td><span th:text="${c.contactInfo}"></span></td>
-
-													<td><span th:text="${c.noOfICU}"></span></td>
-
-													<td><a href="#"> <span
-															th:text="${c.websiteLink}"></span>
-
-													</a></td>
-
-
-
-													<td><a href="#" th:onclick="|deleteContact(${c.hId})|" class="btn btn-danger btn-sm">Delete</a>
-
-
-														<form method="post"
-															th:action="@{'/admin/update-hospital/'+${c.hId}}"
-															class="mt-2">
-
-															<button type="submit" class="btn btn-primary btn-sm">Update</button>
-
-														</form></td>
-												</tr>
-
-
-											</tbody>
-										</table>
+									<div class="custom-file">
+										<input type="file" name="image" />
 
 									</div>
-									<!--  pagination part -->
+								<h4>Website link</h4>
+								<input th:value="${hospitlInformation.websiteLink}" type="text" name="websiteLink">
+								<hr>
+								
+								<div class="container text-center">
 
-
-									<nav aria-label="Page navigation example">
-
-										<ul class="pagination">
-
-											<li th:if="${currentPage != 0}" class="page-item"><a
-												th:href="@{'/admin/show_hospitalInfo/'+${currentPage-1}}"
-												class="page-link" href="#">Previous</a></li>
-
-
-
-											<li th:classappend="${currentPage==i-1?'active':''}"
-												th:each="i : ${#numbers.sequence(1,totalPages)}"
-												class="page-item"><a
-												th:href="@{'/admin/show_hospitalInfo/'+${i-1}}" class="page-link"
-												href="#"><span th:text="${i}"></span></a></li>
-
-
-											<li th:if="${currentPage+1 != totalPages}" class="page-item"><a
-												th:href="@{'/admin/show_hospitalInfo/'+${currentPage+1}}"
-												class="page-link" href="#">Next</a></li>
-										</ul>
-									</nav>
-
-
+									<button class="btn btn-outline-primary">Save Information</button>
 
 								</div>
-
-							</div>
-
-
-
-						</section>
-
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
-
-			<!-- footer -->
-			<div th:replace="component :: footer"></div>
-			<!-- EndFooter -->
 		</div>
+
+		<!-- footer -->
+		<div th:replace="component :: footer"></div>
+		<!-- EndFooter -->
 	</div>
+
 	<div class="fixed-plugin">
 		<div class="dropdown show-dropdown">
 			<a href="#" data-toggle="dropdown"> <i class="fa fa-cog fa-2x">
@@ -253,12 +181,7 @@
 		</div>
 	</div>
 	<!--   Core JS Files   -->
-	<section>
-	<script th:src="@{/js/script.js}"></script>
 	<div th:replace="component :: coreJSfile"></div>
-
-	</section>
-	<!-- End of Core JS Files   -->
 </body>
 
 </html>

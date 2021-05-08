@@ -169,14 +169,19 @@ try {
 		}
 		
 		// open update form handler
-		@PostMapping("/update-contact/{cid}")
-		public String updateForm(@PathVariable("cid") Integer cid, Model m) {
+		@PostMapping("/update-hospital/{cid}")
+		public String updateForm(@PathVariable("cid") Integer cid, Model m, Principal principal) {
+			
+			String name = principal.getName();
+			User user = this.userRepo.getUserByUserName(name);	
+			m.addAttribute("user", user);
 
 			m.addAttribute("title", "Update Contact");
 
 			HospitlInformation hospitlInformation = this.hospitalInfoRepo.findById(cid).get();
 
 			m.addAttribute("hospitlInformation", hospitlInformation);
+			System.out.println("ooooooooooooooo........");
 
 			return "hospital_update_form";
 		}
