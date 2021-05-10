@@ -121,7 +121,7 @@ hr {
 									<div class="row icons-wrapper">
 										<div class="col-sm-3 col-xs-6">
 											<a href=""> <a
-												th:href="@{/details/{isoCode}(isoCode=${header.isoCode})}">
+												th:href="@{/historical/{isoCode}(isoCode=${header.isoCode})}">
 													<figure>
 														<i class="f-icon f-icon-sofa"></i>
 														<figcaption>Historical Place</figcaption>
@@ -156,7 +156,7 @@ hr {
 											</a>
 										</div>
 										<div class="col-sm-3 col-xs-6">
-											<a href="">
+											<a th:href="@{/hospitalInfo/{isoCode}(isoCode=${header.isoCode})}">
 												<figure>
 													<i class="f-icon f-icon-media-cabinet"></i>
 													<figcaption>Hospital</figcaption>

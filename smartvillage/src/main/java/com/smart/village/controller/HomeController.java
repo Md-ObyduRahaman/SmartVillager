@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.smart.village.model.DistrictInformation;
 import com.smart.village.model.UserSms;
+import com.smart.village.repository.DistrictInformationRepo;
 import com.smart.village.repository.UserSmsRepo;
 import com.smart.village.util.Service;
 
@@ -19,6 +21,9 @@ public class HomeController {
 	
 	@Autowired
 	Service service;
+	
+	@Autowired
+	DistrictInformationRepo districtInformationRepo;
 	
 	@Autowired
 	UserSmsRepo userSmsRepo;
@@ -38,6 +43,18 @@ public class HomeController {
 		service.sendSms(userSms);
 		userSmsRepo.save(userSms);	
 		return "contact-success"; 
+	}
+	@GetMapping("/head/divisionInf")
+	public String districtInformation()
+	{
+		return "divisionform";
+	}
+	@PostMapping("/head/saveDistrictData")
+	public String saveDistrictData(@ModelAttribute("districtInformation") DistrictInformation districtInformation)
+	{
+		System.out.println(districtInformation.toString());
+		districtInformationRepo.save(districtInformation);
+		return "redirect:/head/divisionInf";
 	}
 
 }

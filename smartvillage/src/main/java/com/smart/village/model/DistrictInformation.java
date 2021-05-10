@@ -50,8 +50,13 @@ public class DistrictInformation {
 	}
 	@Override
 	public String toString() {
-		return "DistrictInformation [name=" + name + ", isoCode=" + isoCode + ", division=" + division + "]";
+		return "DistrictInformation [name=" + name + ", isoCode=" + isoCode + ", division=" + division
+				+ ", divisionIssoCode=" + divisionIssoCode + ", getDivisionIssoCode()=" + getDivisionIssoCode()
+				+ ", getName()=" + getName() + ", getIsoCode()=" + getIsoCode() + ", getDivision()=" + getDivision()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
+	
 	
 	
 	

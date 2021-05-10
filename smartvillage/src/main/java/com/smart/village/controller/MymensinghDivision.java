@@ -41,7 +41,7 @@ public class MymensinghDivision {
 	public String showDetails(@PathVariable(name = "isoCode") String isoCode ,Model mav)
 	{
 		System.out.println("details...............");
-		return "emni";
+		return "divisionform";
 	}
 
 }
