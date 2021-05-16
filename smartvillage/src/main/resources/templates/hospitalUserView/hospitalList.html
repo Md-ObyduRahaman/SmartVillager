@@ -28,15 +28,15 @@
             </tr>
         </thead>
         <tbody th:with="count=0">
-        <tr th:each = "imageGallery, hh : ${images}">           
+       <tr th:each="c : ${hospitalInfo}">   
                 <td th:with="count=${count+1}" th:text="${count}"></td>
-                <td th:text="${imageGallery.name}"></td>
-                <td><img th:src="@{${'/image/display/'+ imageGallery.id}}" 
-                class="card img-fluid" style="width:300px" alt=""/></td>
-                <td th:text="${imageGallery.description}"></td>
-                <td th:text="${imageGallery.price}"></td>
-                <td th:text="${#dates.format({imageGallery.createDate}, 'dd-MM-yyyy')}"/></td>
-               <td><a th:href="@{/image/imageDetails(id=${imageGallery.id})}" class="btn btn-info text-right" target="_blank">View</a></td>
+                <td th:text="${c.name}"></td>
+                <td><img th:src="@{'/img/'+${c.imageUrl}}" alt="profile photo"  
+                class="card img-fluid" style="width:300px" /></td>
+                <td th:text="${c.description}"></td>
+                <td th:text="${c.contactInfo}"></td>
+                <td th:text="ghj"/></td>
+               <td><a href="#" class="btn btn-info text-right" target="_blank">View</a></td>
             </tr>
         </tbody>
     </table>

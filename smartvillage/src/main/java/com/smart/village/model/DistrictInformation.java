@@ -1,29 +1,51 @@
 package com.smart.village.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "districtInformation")
 public class DistrictInformation {
 	
 	private String name;
 	@Id
 	private String isoCode;
 	private String division;
+	@Column(unique = true)
 	private String divisionIssoCode;
+	
+	
 	public DistrictInformation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public DistrictInformation(String name, String isoCode, String division) {
+
+
+	
+	public DistrictInformation(String name, String isoCode, String division, String divisionIssoCode,
+			List<HospitlInformation> hospitlInformations) {
 		super();
 		this.name = name;
 		this.isoCode = isoCode;
 		this.division = division;
-	}
+		this.divisionIssoCode = divisionIssoCode;
 	
+	}
+
+
+
+
+
+
 	public String getDivisionIssoCode() {
 		return divisionIssoCode;
 	}

@@ -22,4 +22,6 @@ public interface HospitalInfoRepo extends JpaRepository<HospitlInformation,Integ
 		
 		//search
 		public List<HospitlInformation> findByNameContainingAndUser(String name,User user);
+		@Query("from HospitlInformation as c where c.user.issocode =:userId")
+		public List<HospitlInformation> findHospitlInformationById(@Param("userId")String userId);
 }

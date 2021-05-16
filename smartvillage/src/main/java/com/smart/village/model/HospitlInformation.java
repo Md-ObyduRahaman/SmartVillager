@@ -22,6 +22,7 @@ public class HospitlInformation {
 	@ManyToOne	
 	@JsonIgnore
 	private User user;
+	
 
 	public HospitlInformation(int hId, String name, String image, String description, String contactInfo,
 			String noOfICU, String websiteLink, User user) {
@@ -106,6 +107,14 @@ public class HospitlInformation {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	@Override
+	public String toString() {
+		return "HospitlInformation [hId=" + hId + ", name=" + name + ", imageUrl=" + imageUrl + ", description="
+				+ description + ", contactInfo=" + contactInfo + ", noOfICU=" + noOfICU + ", websiteLink=" + websiteLink
+				+ ", user=" + user + "]";
+	}
+
 	
 	
 	
