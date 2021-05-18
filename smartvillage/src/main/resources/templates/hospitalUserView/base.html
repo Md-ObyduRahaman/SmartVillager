@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-th:fragment="layout(content)">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:fragment="head">
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -20,15 +20,15 @@ th:fragment="layout(content)">
     <title th:text="${title}">Base html</title>
 
     <!--CSS styles-->
-    <link rel="stylesheet" media="all" href="css/bootstrap.css" />
-    <link rel="stylesheet" media="all" href="css/animate.css" />
-    <link rel="stylesheet" media="all" href="css/font-awesome.css" />
-    <link rel="stylesheet" media="all" href="css/furniture-icons.css" />
-    <link rel="stylesheet" media="all" href="css/linear-icons.css" />
-    <link rel="stylesheet" media="all" href="css/magnific-popup.css" />
-    <link rel="stylesheet" media="all" href="css/owl.carousel.css" />
-    <link rel="stylesheet" media="all" href="css/ion-range-slider.css" />
-    <link rel="stylesheet" media="all" href="css/theme.css" />
+    <link rel="stylesheet" media="all" th:href="@{/static/css/bootstrap.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/static/css/animate.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/static/css/font-awesome.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/static/css/furniture-icons.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/static/css/linear-icons.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/static/css/magnific-popup.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/static/css/owl.carousel.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/static/css/ion-range-slider.css}" />
+    <link rel="stylesheet" media="all" th:href="@{/static/css/theme.css}" />
 
 
     
@@ -50,7 +50,7 @@ th:fragment="layout(content)">
 
         <!-- ======================== Navigation ======================== -->
 
-        <nav class="navbar-fixed"style="background-color: black;">
+        <nav th:fragment="header" class="navbar-fixed"style="background-color: black;">
 
             <div class="container">
 
@@ -187,7 +187,7 @@ th:fragment="layout(content)">
 
                                         <div class="box-1">
                                             <div class="image">
-                                                <img src="assets/images/blog-2.jpg" alt="Lorem ipsum" />
+                                                <img src="/static/assets/images/blog-2.jpg" alt="Lorem ipsum" />
                                             </div>
                                             <div class="box">
                                                 <div class="h2">Best ideas</div>
@@ -520,7 +520,7 @@ th:fragment="layout(content)">
          <!-- ================== Footer  ================== -->
          
 
-        <footer>
+        <footer th:fragment="footer">
             <div class="container">
 
                 <!--footer showroom-->
@@ -599,13 +599,15 @@ th:fragment="layout(content)">
 
 
     <!--JS files-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.bootstrap.js"></script>
-    <script src="js/jquery.magnific-popup.js"></script>
-    <script src="js/jquery.owl.carousel.js"></script>
-    <script src="js/jquery.ion.rangeSlider.js"></script>
-    <script src="js/jquery.isotope.pkgd.js"></script>
-    <script src="js/main.js"></script>
+    <section th:fragment="coreJSfile">
+    <script th:src="@{/src/main/resources/static/js/jquery.min.js}"></script>
+    <script th:src="@{/src/main/resources//static/js/jquery.bootstrap.js}"></script>
+    <script th:src="@{/src/main/resources//static/js/jquery.magnific-popup.js}"></script>
+    <script th:src="@{/src/main/resources//static/js/jquery.owl.carousel.js}"></script>
+    <script th:src="@{/src/main/resources//static/js/jquery.ion.rangeSlider.js}"></script>
+    <script th:src="@{/src/main/resources//static/js/jquery.isotope.pkgd.js}"></script>
+    <script th:src="@{/src/main/resources//static/js/main.js}"></script>
+    </section>
 </body>
 
 </html>
