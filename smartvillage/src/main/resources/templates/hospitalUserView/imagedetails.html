@@ -6,7 +6,7 @@
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/stylei.css">
 </head>
 <body>
 <br>
@@ -22,7 +22,7 @@
 					<div class="grid images_3_of_2">
 						<div class="flexslider">
 						<div class="thumb-image">
-							<img th:src="@{${'/image/display/'+id}}" 
+							<img th:src="@{'/img/'+${imageUrl}}" 
 							 class="img img-responsive img-fluid" alt=""> 
 						</div>
 							<div class="clearfix"></div>
@@ -33,13 +33,21 @@
 				<div class="col-lg-7 single-right-left simpleCart_shelfItem">
 					Name: <span th:text="${name}" class="mb-3"></span>
 					<p class="mb-3">
-						Price :&#36; <span class="item_price" th:text="${price}"></span>
+						ContactInfo : <span class="item_price" th:text="${contact}"></span>
 					</p>
 					<div class="product-single-w3l">
 						Description: <span th:text="${description}" class="my-sm-4 my-3"> 
 						</span>
 					</div><br>
-					<a href="/image/show">Go Back</a>
+					<div class="product-single-w3l">
+						websiteLink: <span class="my-sm-4 my-3"> <a th:href="${link}">Link</a>
+						</span>
+					</div><br>
+					<div class="product-single-w3l">
+						NoOf ICU: <span th:text="${noICU}" class="my-sm-4 my-3"> 
+						</span>
+					</div><br>
+					<a href="#">Go Back</a>
 					&emsp;<a href="/">Go Home</a>
 				</div>
 			</div>

@@ -42,6 +42,13 @@ public class HospitalClientController {
 	
 	{
 		hospitlInformation=hospitalInfoRepo.findById(id);
+		model.addAttribute("imageUrl", hospitlInformation.get().getImageUrl());
+		model.addAttribute("name", hospitlInformation.get().getName());
+		model.addAttribute("description", hospitlInformation.get().getDescription());
+		model.addAttribute("contact", hospitlInformation.get().getContactInfo());
+		model.addAttribute("noICU", hospitlInformation.get().getNoOfICU());
+		model.addAttribute("link", hospitlInformation.get().getWebsiteLink());
+
 		System.out.println("............."+hospitlInformation.toString());
 		return "hospitalUserView/imagedetails";
 	}
