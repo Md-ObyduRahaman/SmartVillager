@@ -11,7 +11,7 @@ public class WebServerStaticResourceConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("admin/show_hospitalInfo/**",
+        registry.addResourceHandler("admin/show_hospitalInfo/**","mymensingh/**",
         		"/**","/admin/**","/hospitalInfo/**","/static/**",
         		"/head/**","admin/update-hospital/**").addResourceLocations("classpath:/static/");
     }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.smart.village.model.LinkClick;
@@ -21,8 +22,8 @@ public class DivisionController {
 	@Autowired
 	DistrictInformationRepo  districtInformationRepo;
 
-	@GetMapping("/mymensingh")
-	public String mymensingh(Model m) {
+	@GetMapping("/mymensingh/{cid}")
+	public String mymensingh(@PathVariable("cid") String cid,Model m) {
 		System.out.println("@GetMapping(\"/mymensingh\")...................");
 		
 		boolean active= linkClick.isActive();
@@ -34,7 +35,7 @@ public class DivisionController {
 			m.addAttribute("header", linkClick.getDistrictInformation());
 		}
 
-		List list = districtInformationRepo.findAll();
+		List list = districtInformationRepo.findBydivisionIssoCode(cid);
 		if(!list.isEmpty())
 		{
 			m.addAttribute("data", list);

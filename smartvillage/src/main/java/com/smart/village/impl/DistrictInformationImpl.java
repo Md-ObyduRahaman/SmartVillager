@@ -178,4 +178,10 @@ public class DistrictInformationImpl implements DistrictInformationRepo {
 		return null;
 	}
 
+	@Override
+	public List<DistrictInformation> findBydivisionIssoCode(String divisionIssoCode) {
+		// TODO Auto-generated method stub
+		return districtInformationRepo.findBydivisionIssoCode(divisionIssoCode);
+	}
+
 }
