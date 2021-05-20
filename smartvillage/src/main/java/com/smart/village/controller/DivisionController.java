@@ -24,7 +24,36 @@ public class DivisionController {
 
 	@GetMapping("/mymensingh/{cid}")
 	public String mymensingh(@PathVariable("cid") String cid,Model m) {
-		System.out.println("@GetMapping(\"/mymensingh\")...................");
+		
+		boolean active= linkClick.isActive();
+		System.out.println(active+".....................");
+		if (active) {
+			linkClick.setActive(false);
+			m.addAttribute("link","ok");
+			
+			m.addAttribute("header", linkClick.getDistrictInformation());
+		}
+
+		List list = districtInformationRepo.findBydivisionIssoCode(cid);
+		System.out.println(list.size());
+		if(!list.isEmpty())
+		{
+			m.addAttribute("data", list);
+			m.addAttribute("result",districtInformationRepo.count());
+		}
+		else
+		{
+			m.addAttribute("msg", "Record not found!");
+		}
+		
+		
+		m.addAttribute("title","Mymensingh Division");
+		
+		return "mymensingh_division";
+	}
+	
+	@GetMapping("/barishal/{cid}")
+	public String barishal(@PathVariable("cid") String cid,Model m) {
 		
 		boolean active= linkClick.isActive();
 		System.out.println(active+".....................");
@@ -46,11 +75,12 @@ public class DivisionController {
 			m.addAttribute("msg", "Record not found!");
 		}
 		
-		
-		m.addAttribute("title","Mymensingh Division");
+		System.out.println(list.size());
+		m.addAttribute("title","Barishal Division");
 		
 		return "mymensingh_division";
 	}
+	
 	@GetMapping("/contact")
 	public String contact (Model model) {
 		UserSms userSms=new UserSms();

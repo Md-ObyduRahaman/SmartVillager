@@ -28,13 +28,14 @@ public class MymensinghDivision {
 	
 	@RequestMapping("/district/{isoCode}")
 	 public String showEditCustomerPage(@PathVariable(name = "isoCode") String isoCode ,Model mav) {
-       linkClick.setActive(true);
+      
+		linkClick.setActive(true);
         DistrictInformation districtInformation=districtInformationRepo.getOne(isoCode);
         linkClick.setDistrictInformation(districtInformation);
       System.out.println(districtInformation.toString());
         System.out.println("@RequestMapping(\"/district/{isoCode}\").........................");
         mav.addAttribute("districtInformation", districtInformation);
-        return  "redirect:/mymensingh";
+        return  "redirect:/mymensingh/{isoCode}";
        // return "districInformation";
     }
 	@RequestMapping("/details/{isoCode}")
