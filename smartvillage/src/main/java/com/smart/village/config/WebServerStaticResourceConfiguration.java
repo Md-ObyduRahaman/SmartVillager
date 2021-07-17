@@ -13,6 +13,11 @@ public class WebServerStaticResourceConfiguration implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("admin/show_hospitalInfo/**","mymensingh/**",
         		"/**","/admin/**","/hospitalInfo/**","/static/**","/barishal/**",
-        		"/head/**","admin/update-hospital/**").addResourceLocations("classpath:/static/");
+        		"/dhaka/**","/khulna/**","/rajshahi/**","/rangpur/**","/sylhet/**",
+        		"/chittagong/**",
+        		"/head/**","admin/update-hospital/**",
+        		//university
+        		"admin/update-university/**",
+        		"/universityInfo/**","admin//show_universityInfo/**").addResourceLocations("classpath:/static/");
     }
 }

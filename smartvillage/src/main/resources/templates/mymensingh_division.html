@@ -81,10 +81,10 @@ hr {
 			style="background-image: url(assets/images/gallery-1.jpg)">
 			<header>
 				<div class="container">
-					<h1 class="h2 title">Mymensingh</h1>
+					<h1 class="h2 title" th:text="${title}"></h1>
 					<ol class="breadcrumb breadcrumb-inverted">
 						<li><a href="#"><span class="icon icon-home"></span></a></li>
-						<li class="active">Mymensingh</li>
+						<li class="active"th:text="${title}"></li>
 					</ol>
 				</div>
 			</header>
@@ -101,7 +101,7 @@ hr {
 						<div data-spy="affix" data-offset-top="280">
 							<ul class="list-group" th:each="data:${data}">
 								<li class="list-group-item"><a
-									th:href="@{/district/{isoCode}(isoCode=${data.isoCode})}">
+									th:href="@{/district/{url}/{isoCode}(isoCode=${data.isoCode},url=${data.division})}">
 										<h3 th:text="${data.name}" />
 								</a></li>
 							</ul>

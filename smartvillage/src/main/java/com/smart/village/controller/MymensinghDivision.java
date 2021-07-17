@@ -26,16 +26,17 @@ public class MymensinghDivision {
 	@Autowired
 	DistrictInformationRepo districtInformationRepo;
 	
-	@RequestMapping("/district/{isoCode}")
-	 public String showEditCustomerPage(@PathVariable(name = "isoCode") String isoCode ,Model mav) {
+	@RequestMapping("/district/{url}/{isoCode}")
+	 public String showEditCustomerPage(@PathVariable(name = "isoCode") String isoCode ,@PathVariable(name = "url") String url ,Model mav) {
       
+		url=url.toLowerCase();
 		linkClick.setActive(true);
         DistrictInformation districtInformation=districtInformationRepo.getOne(isoCode);
         linkClick.setDistrictInformation(districtInformation);
-      System.out.println(districtInformation.toString());
-        System.out.println("@RequestMapping(\"/district/{isoCode}\").........................");
+        System.out.println(districtInformation.toString());
+        System.out.println(url+"............");
         mav.addAttribute("districtInformation", districtInformation);
-        return  "redirect:/mymensingh/{isoCode}";
+        return  "redirect:/"+url+"/{isoCode}";
        // return "districInformation";
     }
 	@RequestMapping("/details/{isoCode}")

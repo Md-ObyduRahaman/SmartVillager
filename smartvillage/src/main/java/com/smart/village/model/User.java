@@ -53,6 +53,19 @@ public class User {
 	public void setHospitlInformations(List<HospitlInformation> hospitlInformations) {
 		this.hospitlInformations = hospitlInformations;
 	}
+	
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<UniversityInformation> universityInformation=new ArrayList<>();
+	
+	
+	
+	public List<UniversityInformation> getUniversityInformation() {
+		return universityInformation;
+	}
+	
+	public void setUniversityInformation(List<UniversityInformation> universityInformation) {
+		this.universityInformation = universityInformation;
+	}
 
 	public String getIssocode() {
 		return issocode;
