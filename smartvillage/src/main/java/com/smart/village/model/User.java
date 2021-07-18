@@ -79,6 +79,19 @@ public class User {
 	public void setHistoricalPlaceInformation(List<HistoricalPlaceInformation> historicalPlaceInformation) {
 		this.historicalPlaceInformation = historicalPlaceInformation;
 	}
+	
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<TraditionalFoodInformation> traditionalFoodInformation=new ArrayList<>();
+	
+	
+
+	public List<TraditionalFoodInformation> getTraditionalFoodInformation() {
+		return traditionalFoodInformation;
+	}
+
+	public void setTraditionalFoodInformation(List<TraditionalFoodInformation> traditionalFoodInformation) {
+		this.traditionalFoodInformation = traditionalFoodInformation;
+	}
 
 	public String getIssocode() {
 		return issocode;
