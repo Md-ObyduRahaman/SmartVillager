@@ -29,163 +29,160 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.smart.village.model.HistoricalPlaceInformation;
 import com.smart.village.model.Message;
-import com.smart.village.model.UniversityInformation;
 import com.smart.village.model.User;
 import com.smart.village.repository.HistoricalPlaceRepo;
-import com.smart.village.repository.UniversityRepo;
 import com.smart.village.repository.UserRepo;
 
 @Controller
 @RequestMapping("/admin")
 public class HistoricalPlaceController {
-	
+
 	@Autowired
 	UserRepo userRepo;
 	@Autowired
 	HistoricalPlaceRepo historicalPlaceRepo;
-	
-	HistoricalPlaceInformation historicalPlaceInformation  ;
 
-	
+	HistoricalPlaceInformation historicalPlaceInformation;
+
 	@GetMapping("/HistoricalPlaceInformation")
-	public String hospital(Model model,Principal principal)
-	 {
-		 String name = principal.getName();
-			User user = this.userRepo.getUserByUserName(name);	
-			model.addAttribute("user", user);
-		 
+	public String hospital(Model model, Principal principal) {
+		String name = principal.getName();
+		User user = this.userRepo.getUserByUserName(name);
+		model.addAttribute("user", user);
+
 		return "historicalPlaceInformationForm";
 	}
-	
+
 	@PostMapping("/saveHistoricalPlaceInformation")
-	public String savehospitalInformation(@Valid @ModelAttribute HistoricalPlaceInformation historicalPlaceInformation,@RequestParam("image") MultipartFile file,
-			Principal principal,Model model) {
+	public String savehospitalInformation(@Valid @ModelAttribute HistoricalPlaceInformation historicalPlaceInformation,
+			@RequestParam("image") MultipartFile file, Principal principal, Model model) {
 		System.out.println(historicalPlaceInformation.toString());
-		 	String name = principal.getName();
-			User user = this.userRepo.getUserByUserName(name);	
-			model.addAttribute("user", user);
-try {
+		String name = principal.getName();
+		User user = this.userRepo.getUserByUserName(name);
+		model.addAttribute("user", user);
+		try {
 
-				
+			// processing and uploading file..
 
-				// processing and uploading file..
+			if (file.isEmpty()) {
+				// if the file is empty then try our message
+				System.out.println("File is empty");
+				historicalPlaceInformation.setImageUrl("contact.png");
 
-				if (file.isEmpty()) {
-					// if the file is empty then try our message
-					System.out.println("File is empty");
-					historicalPlaceInformation.setImageUrl("contact.png");
+			} else {
+				// file the file to folder and update the name to contact
+				historicalPlaceInformation.setImageUrl(file.getOriginalFilename());
 
-				} else {
-					// file the file to folder and update the name to contact
-					historicalPlaceInformation.setImageUrl(file.getOriginalFilename());
+				File saveFile = new ClassPathResource("static/img").getFile();
 
-					File saveFile = new ClassPathResource("static/img").getFile();
+				Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename());
 
-					Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename());
+				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
-					Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-
-					System.out.println("Image is uploaded");
-
-				}
-				
-				user.getHistoricalPlaceInformation().add(historicalPlaceInformation);
-
-				historicalPlaceInformation.setUser(user);
-
-				this.userRepo.save(user);	
-
-				
-
-			
-			} catch (Exception e) {
-				System.out.println("ERROR " + e.getMessage());
-				e.printStackTrace();
-				// message error
-				//session.setAttribute("message", new Message("Some went wrong !! Try again..", "danger"));
+				System.out.println("Image is uploaded");
 
 			}
-			
-					return "404";
-			
-		//return "redirect:/admin/show_universityInfo/0";	
+
+			user.getHistoricalPlaceInformation().add(historicalPlaceInformation);
+
+			historicalPlaceInformation.setUser(user);
+
+			this.userRepo.save(user);
+
+		} catch (Exception e) {
+			System.out.println("ERROR " + e.getMessage());
+			e.printStackTrace();
+			// message error
+			// session.setAttribute("message", new Message("Some went wrong !! Try again..",
+			// "danger"));
+
+		}
+
+		// return "404";
+
+		return "redirect:/admin/show_historicalPlaceInfo/0";
 	}
-	/*
-	 * @GetMapping("/show_universityInfo/{page}") public String
-	 * showHospital(@PathVariable("page") Integer page, Model model,Principal
-	 * principal) { String name = principal.getName(); User user =
-	 * this.userRepo.getUserByUserName(name); model.addAttribute("user", user);
-	 * 
-	 * Pageable pageable = PageRequest.of(page, 2); Page<UniversityInformation>
-	 * universityInformation =
-	 * this.universityRepo.findUniversityInformationByUser(user.getIssocode(),
-	 * pageable); model.addAttribute("universityInformation",
-	 * universityInformation); model.addAttribute("currentPage", page);
-	 * model.addAttribute("totalPages", universityInformation.getTotalPages());
-	 * 
-	 * 
-	 * return "show_universityInfo"; }
-	 * 
-	 * // showing particular contact details.
-	 * 
-	 * @RequestMapping("/{cId}/contact-university") public String
-	 * showhospitalInfoDetail(@PathVariable("cId") Integer cId, Model model,
-	 * Principal principal) { System.out.println("CID " + cId);
-	 * 
-	 * Optional<UniversityInformation> contactOptional =
-	 * this.universityRepo.findById(cId); UniversityInformation
-	 * universityInformation = contactOptional.get();
-	 * 
-	 * // String userName = principal.getName(); User user =
-	 * this.userRepo.getUserByUserName(userName);
-	 * 
-	 * if (user.getIssocode() == universityInformation.getUser().getIssocode()) {
-	 * model.addAttribute("contact", universityInformation);
-	 * model.addAttribute("title", universityInformation.getName()); }
-	 * 
-	 * return "normal/contact_detail"; }
-	 * 
-	 * // delete contact handler
-	 * 
-	 * @GetMapping("/delete-university/{cid}")
-	 * 
-	 * @Transactional public String deleteContact(@PathVariable("cid") Integer cId,
-	 * Model model, HttpSession session, Principal principal) {
-	 * System.out.println("CID " + cId);
-	 * 
-	 * UniversityInformation universityInformation =
-	 * this.universityRepo.findById(cId).get(); // check...Assignment..image delete
-	 * 
-	 * // delete old photo
-	 * 
-	 * User user = this.userRepo.getUserByUserName(principal.getName());
-	 * 
-	 * user.getUniversityInformation().remove(universityInformation);
-	 * 
-	 * this.userRepo.save(user);
-	 * 
-	 * System.out.println("DELETED"); session.setAttribute("message", new
-	 * Message("Contact deleted succesfully...", "success"));
-	 * 
-	 * return "redirect:/admin/show_universityInfo/0"; }
-	 * 
-	 * // open update form handler
-	 * 
-	 * @PostMapping("/update-university/{cid}") public String
-	 * updateForm(@PathVariable("cid") Integer cid, Model m, Principal principal) {
-	 * 
-	 * String name = principal.getName(); User user =
-	 * this.userRepo.getUserByUserName(name); m.addAttribute("user", user);
-	 * 
-	 * m.addAttribute("title", "Update Contact");
-	 * 
-	 * UniversityInformation universityInformation =
-	 * this.universityRepo.findById(cid).get();
-	 * 
-	 * m.addAttribute("universityInformation", universityInformation);
-	 * System.out.println("ooooooooooooooo........");
-	 * 
-	 * return "university_update_form"; }
-	 */
+
+	@GetMapping("/show_historicalPlaceInfo/{page}")
+	public String showHospital(@PathVariable("page") Integer page, Model model, Principal principal) {
+		String name = principal.getName();
+		User user = this.userRepo.getUserByUserName(name);
+		model.addAttribute("user", user);
+
+		Pageable pageable = PageRequest.of(page, 2);
+		Page<HistoricalPlaceInformation> historicalPlaceInformation = this.historicalPlaceRepo.findHistoricalPlaceInformationByUser(user.getIssocode(), pageable);
+		model.addAttribute("historicalPlaceInformation", historicalPlaceInformation);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", historicalPlaceInformation.getTotalPages());
+
+		return "show_historicalPlaceInfo";
+	}
+
+	// showing particular contact details.
+
+	@RequestMapping("/{cId}/contact-historicalPlace")
+	public String showhospitalInfoDetail(@PathVariable("cId") Integer cId, Model model, Principal principal) {
+		System.out.println("CID " + cId);
+
+		Optional<HistoricalPlaceInformation> contactOptional = this.historicalPlaceRepo.findById(cId);
+		HistoricalPlaceInformation historicalPlaceInformation = contactOptional.get();
+
+		String userName = principal.getName();
+		User user = this.userRepo.getUserByUserName(userName);
+
+		if (user.getIssocode() == historicalPlaceInformation.getUser().getIssocode()) {
+			model.addAttribute("contact", historicalPlaceInformation);
+			model.addAttribute("title", historicalPlaceInformation.getName());
+		}
+
+		return "normal/contact_detail";
+	}
+
+	// delete contact handler
+
+	@GetMapping("/delete-historicalPlace/{cid}")
+
+	@Transactional
+	public String deleteContact(@PathVariable("cid") Integer cId, Model model, HttpSession session,
+			Principal principal) {
+		System.out.println("CID " + cId);
+
+		HistoricalPlaceInformation historicalPlaceInformation = this.historicalPlaceRepo.findById(cId).get(); 
+		// check...Assignment..image
+																								
+		// delete
+
+		// delete old photo
+
+		User user = this.userRepo.getUserByUserName(principal.getName());
+
+		user.getHistoricalPlaceInformation().remove(historicalPlaceInformation);
+
+		this.userRepo.save(user);
+
+		System.out.println("DELETED");
+		session.setAttribute("message", new Message("Contact deleted succesfully...", "success"));
+
+		return "redirect:/admin/show_historicalPlaceInfo/0";
+	}
+
+	// open update form handler
+
+	@PostMapping("/update-historicalPlace/{cid}")
+	public String updateForm(@PathVariable("cid") Integer cid, Model m, Principal principal) {
+
+		String name = principal.getName();
+		User user = this.userRepo.getUserByUserName(name);
+		m.addAttribute("user", user);
+
+		m.addAttribute("title", "Update Contact");
+
+		HistoricalPlaceInformation historicalPlaceInformation = this.historicalPlaceRepo.findById(cid).get();
+
+		m.addAttribute("historicalPlaceInformation", historicalPlaceInformation);
+		System.out.println("ooooooooooooooo........");
+
+		return "historicalPlace_update_form";
+	}
 
 }
