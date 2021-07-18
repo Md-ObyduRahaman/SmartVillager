@@ -66,6 +66,19 @@ public class User {
 	public void setUniversityInformation(List<UniversityInformation> universityInformation) {
 		this.universityInformation = universityInformation;
 	}
+	
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<HistoricalPlaceInformation> historicalPlaceInformation=new ArrayList<>();
+	
+	
+
+	public List<HistoricalPlaceInformation> getHistoricalPlaceInformation() {
+		return historicalPlaceInformation;
+	}
+
+	public void setHistoricalPlaceInformation(List<HistoricalPlaceInformation> historicalPlaceInformation) {
+		this.historicalPlaceInformation = historicalPlaceInformation;
+	}
 
 	public String getIssocode() {
 		return issocode;

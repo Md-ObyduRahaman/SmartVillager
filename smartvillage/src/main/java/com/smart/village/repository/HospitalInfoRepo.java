@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.smart.village.model.DistrictInformation;
 import com.smart.village.model.HospitlInformation;
 import com.smart.village.model.User;
 
