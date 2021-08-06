@@ -92,6 +92,21 @@ public class User {
 	public void setTraditionalFoodInformation(List<TraditionalFoodInformation> traditionalFoodInformation) {
 		this.traditionalFoodInformation = traditionalFoodInformation;
 	}
+	
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<CarGarageInformation> cargarageInformation=new ArrayList<>();
+	
+	
+
+	public List<CarGarageInformation> getCarGarageInformation() {
+		return cargarageInformation;
+	}
+
+	public void setCarGarageInformation(List<CarGarageInformation> cargarageInformation) {
+		this.cargarageInformation = cargarageInformation;
+	}
+	
+	
 
 	public String getIssocode() {
 		return issocode;

@@ -24,7 +24,11 @@ public class WebServerStaticResourceConfiguration implements WebMvcConfigurer {
         		"/universityInfo/**","admin/show_historicalPlaceInfo/**",
         		//traditionalFood
         		"admin/update-traditionalFoodInformation/**",
-        		"/traditionalFoodInformationForm/**","admin/show_traditionalFood/**"
+        		"/traditionalFoodInformationForm/**","admin/show_traditionalFood/**",
+        		//CarGarage
+        		"admin/update-cargarage/**",
+        		"/traditionalFoodInformationForm/**","admin/show_cargarageInfo/**"
+        		
         		
         		).addResourceLocations("classpath:/static/");
     }
